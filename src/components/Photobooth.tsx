@@ -272,7 +272,7 @@ export default function Photobooth() {
       const video = videoRef.current;
       if (!video) return;
 
-      const camera = new CameraCtor(video, {
+      const camera = new w.Camera(video, {
         onFrame: async () => {
           if (!videoRef.current) return;
           await hands.send({ image: videoRef.current });
