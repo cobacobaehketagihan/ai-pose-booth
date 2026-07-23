@@ -526,141 +526,295 @@ const PhotoStrip = forwardRef<
     day: "numeric",
   });
 
+  // ---- STRAWBERRY: soft pink scrapbook, strawberries + bows + hearts ----
   if (template === "strawberry") {
+    const tilt = ["-rotate-2", "rotate-1", "-rotate-1"];
     return (
       <div
         ref={ref}
-        className="w-[340px] rounded-3xl p-5 shadow-2xl"
+        className="relative w-[360px] p-5 shadow-2xl"
         style={{
+          borderRadius: "14px",
           background:
-            "linear-gradient(180deg,#ffe4ec 0%,#fff5e6 50%,#ffe4ec 100%)",
-        }}
-      >
-        <div className="mb-3 text-center">
-          <div className="text-2xl">🍓 🌸 🍓</div>
-          <div className="text-xs font-bold tracking-widest text-rose-700">
-            INDRAGIRI STRAWBERRY ZONE
-          </div>
-        </div>
-        <div className="flex flex-col gap-3">
-          {photos.map((p, i) => (
-            <div
-              key={i}
-              className="overflow-hidden rounded-xl border-4 border-white shadow-md"
-            >
-              <img src={p} alt="" className="aspect-[4/3] w-full object-cover" />
-            </div>
-          ))}
-        </div>
-        <div className="mt-4 text-center">
-          <div className="text-sm font-semibold text-rose-700">
-            P2M Informatika @ Desa Indragiri
-          </div>
-          <div className="text-[10px] text-rose-500">{date} · 🍓 sweet moments</div>
-        </div>
-      </div>
-    );
-  }
-
-  if (template === "cyberpunk") {
-    return (
-      <div
-        ref={ref}
-        className="w-[340px] rounded-2xl p-5 shadow-2xl"
-        style={{
-          background:
-            "linear-gradient(180deg,#0a0a1f 0%,#12002b 50%,#0a0a1f 100%)",
-          backgroundImage:
-            "linear-gradient(180deg,#0a0a1f 0%,#12002b 50%,#0a0a1f 100%), repeating-linear-gradient(0deg, rgba(0,255,255,0.06) 0 1px, transparent 1px 20px), repeating-linear-gradient(90deg, rgba(255,0,255,0.06) 0 1px, transparent 1px 20px)",
+            "radial-gradient(circle at 20% 15%, #ffd3e0 0 2px, transparent 3px)," +
+            "radial-gradient(circle at 70% 40%, #ffe4ec 0 2px, transparent 3px)," +
+            "linear-gradient(180deg,#ffe9f0 0%,#fff6ec 45%,#ffe4ec 100%)",
+          backgroundSize: "36px 36px, 48px 48px, 100% 100%",
+          border: "6px double #f5a3bb",
           boxShadow:
-            "0 0 40px rgba(255,0,180,0.4), inset 0 0 20px rgba(0,255,255,0.2)",
+            "0 0 0 3px #fff inset, 0 0 0 9px #ffd3e0 inset, 0 20px 40px -12px rgba(219,80,120,.35)",
         }}
       >
+        {/* corner decorations */}
+        <div className="absolute -top-3 -left-2 text-2xl rotate-[-20deg]">🎀</div>
+        <div className="absolute -top-3 -right-2 text-2xl rotate-[15deg]">🍓</div>
+        <div className="absolute -bottom-3 -left-2 text-2xl">🌸</div>
+        <div className="absolute -bottom-3 -right-2 text-2xl">🐰</div>
+
         <div className="mb-3 text-center">
           <div
-            className="text-lg font-black tracking-[0.3em]"
+            className="text-3xl leading-none text-rose-600"
             style={{
-              color: "#0ff",
-              textShadow: "0 0 8px #0ff, 0 0 16px #f0f",
+              fontFamily: "'Brush Script MT','Segoe Script',cursive",
             }}
           >
-            &lt; AI.BOOTH /&gt;
+            Strawberry Memories
           </div>
-          <div className="text-[10px] font-mono" style={{ color: "#f0f" }}>
-            FUTURE_TECH_AI_PHOTOBOOTH.EXE
+          <div className="mt-1 text-[10px] font-bold tracking-[0.25em] text-rose-500">
+            ✦ INDRAGIRI STRAWBERRY ZONE ✦
           </div>
         </div>
+
         <div className="flex flex-col gap-3">
           {photos.map((p, i) => (
-            <div
-              key={i}
-              className="overflow-hidden rounded-lg"
-              style={{
-                border: "2px solid #0ff",
-                boxShadow: "0 0 12px #0ff, inset 0 0 8px rgba(255,0,255,0.4)",
-              }}
-            >
-              <img src={p} alt="" className="aspect-[4/3] w-full object-cover" />
+            <div key={i} className={`relative ${tilt[i]}`}>
+              <div
+                className="bg-white p-2 pb-3 shadow-md"
+                style={{
+                  border: "2px solid #ffb3c8",
+                  borderRadius: "8px",
+                  backgroundImage:
+                    "radial-gradient(circle at 8% 8%, #ffe4ec 0 3px, transparent 4px), radial-gradient(circle at 92% 92%, #ffe4ec 0 3px, transparent 4px)",
+                }}
+              >
+                <img
+                  src={p}
+                  alt=""
+                  className="aspect-[4/3] w-full object-cover"
+                  style={{ borderRadius: "4px" }}
+                />
+              </div>
+              {/* tiny sticker per frame */}
+              <div className="absolute -left-2 -top-2 text-lg">
+                {["🍓", "💗", "🌷"][i]}
+              </div>
+              <div className="absolute -right-2 -bottom-2 text-lg">
+                {["🎀", "✨", "🐰"][i]}
+              </div>
             </div>
           ))}
         </div>
-        <div
-          className="mt-4 text-center font-mono text-[10px]"
-          style={{ color: "#0ff" }}
-        >
-          [ {date.toUpperCase()} ] // NEON_MEMORIES
+
+        <div className="mt-4 text-center">
+          <div
+            className="text-xl text-rose-600"
+            style={{ fontFamily: "'Brush Script MT','Segoe Script',cursive" }}
+          >
+            my sweetest dream 🍓
+          </div>
+          <div className="mt-1 text-[10px] font-semibold tracking-wider text-rose-500">
+            P2M INFORMATIKA · DESA INDRAGIRI
+          </div>
+          <div className="text-[9px] italic text-rose-400">{date}</div>
         </div>
       </div>
     );
   }
 
-  // polaroid
+  // ---- CYBERPUNK: dark neon scrapbook with the same ornate feel ----
+  if (template === "cyberpunk") {
+    const tilt = ["-rotate-2", "rotate-1", "-rotate-1"];
+    return (
+      <div
+        ref={ref}
+        className="relative w-[360px] p-5 shadow-2xl"
+        style={{
+          borderRadius: "14px",
+          background:
+            "repeating-linear-gradient(0deg, rgba(0,255,255,.06) 0 1px, transparent 1px 22px)," +
+            "repeating-linear-gradient(90deg, rgba(255,0,200,.06) 0 1px, transparent 1px 22px)," +
+            "linear-gradient(180deg,#0a0018 0%,#160034 50%,#0a0018 100%)",
+          border: "3px solid #ff2bd6",
+          boxShadow:
+            "0 0 0 3px #0a0018 inset, 0 0 0 6px #00e5ff inset, 0 0 40px rgba(255,43,214,.5), 0 20px 40px -10px rgba(0,229,255,.4)",
+        }}
+      >
+        <div
+          className="absolute -top-3 -left-2 rounded px-1 text-[10px] font-mono"
+          style={{
+            background: "#00e5ff",
+            color: "#0a0018",
+          }}
+        >
+          ◆ SYS.OK
+        </div>
+        <div
+          className="absolute -top-3 -right-2 rounded px-1 text-[10px] font-mono"
+          style={{ background: "#ff2bd6", color: "#0a0018" }}
+        >
+          v2.077 ◆
+        </div>
+        <div className="absolute -bottom-3 -left-2 text-lg">⚡</div>
+        <div className="absolute -bottom-3 -right-2 text-lg">🤖</div>
+
+        <div className="mb-3 text-center">
+          <div
+            className="text-2xl font-black leading-none"
+            style={{
+              color: "#00e5ff",
+              fontFamily: "'Brush Script MT','Segoe Script',cursive",
+              textShadow: "0 0 8px #00e5ff, 0 0 16px #ff2bd6",
+            }}
+          >
+            Neon Memories
+          </div>
+          <div
+            className="mt-1 text-[10px] font-mono tracking-[0.25em]"
+            style={{ color: "#ff2bd6" }}
+          >
+            ▚ FUTURE.TECH.AI.PHOTOBOOTH ▞
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          {photos.map((p, i) => (
+            <div key={i} className={`relative ${tilt[i]}`}>
+              <div
+                className="p-2"
+                style={{
+                  borderRadius: "6px",
+                  background:
+                    "linear-gradient(135deg,#ff2bd6 0%,#00e5ff 100%)",
+                  boxShadow: "0 0 14px rgba(0,229,255,.6)",
+                }}
+              >
+                <div
+                  className="p-1"
+                  style={{
+                    background: "#0a0018",
+                    borderRadius: "4px",
+                  }}
+                >
+                  <img
+                    src={p}
+                    alt=""
+                    className="aspect-[4/3] w-full object-cover"
+                    style={{
+                      borderRadius: "2px",
+                      filter: "saturate(1.1) contrast(1.05)",
+                    }}
+                  />
+                </div>
+              </div>
+              <div
+                className="absolute -left-2 -top-2 rounded px-1 text-[9px] font-mono"
+                style={{ background: "#00e5ff", color: "#0a0018" }}
+              >
+                #{String(i + 1).padStart(2, "0")}
+              </div>
+              <div className="absolute -right-2 -bottom-2 text-sm">
+                {["✦", "▲", "◆"][i]}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 text-center">
+          <div
+            className="text-lg"
+            style={{
+              color: "#00e5ff",
+              fontFamily: "'Brush Script MT','Segoe Script',cursive",
+              textShadow: "0 0 6px #ff2bd6",
+            }}
+          >
+            digital dreams ⚡
+          </div>
+          <div
+            className="mt-1 text-[10px] font-mono tracking-widest"
+            style={{ color: "#ff2bd6" }}
+          >
+            [ {date.toUpperCase()} ]
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ---- CLASSIC POLAROID: vintage cream, pressed flowers, handwriting ----
+  const tilt = ["-rotate-2", "rotate-1", "-rotate-1"];
   return (
     <div
       ref={ref}
-      className="w-[340px] p-5 shadow-2xl"
+      className="relative w-[360px] p-5 shadow-2xl"
       style={{
-        background:
-          "linear-gradient(180deg,#faf7f0 0%,#f2ede0 100%)",
-        backgroundImage:
-          "linear-gradient(180deg,#faf7f0 0%,#f2ede0 100%), radial-gradient(circle at 20% 30%, rgba(0,0,0,0.03) 0 2px, transparent 3px), radial-gradient(circle at 70% 60%, rgba(0,0,0,0.03) 0 2px, transparent 3px)",
         borderRadius: "6px",
+        background:
+          "radial-gradient(circle at 20% 30%, rgba(120,90,60,.05) 0 1.5px, transparent 2.5px)," +
+          "radial-gradient(circle at 70% 60%, rgba(120,90,60,.05) 0 1.5px, transparent 2.5px)," +
+          "linear-gradient(180deg,#faf5ea 0%,#efe6d2 100%)",
+        backgroundSize: "22px 22px, 30px 30px, 100% 100%",
+        border: "1px solid #d9cdb3",
+        boxShadow:
+          "0 0 0 6px #faf5ea inset, 0 0 0 7px #c9b891 inset, 0 20px 40px -12px rgba(90,70,40,.35)",
       }}
     >
+      <div className="absolute -top-3 -left-2 text-xl rotate-[-15deg]">🌿</div>
+      <div className="absolute -top-3 -right-2 text-xl rotate-[15deg]">🌼</div>
+      <div className="absolute -bottom-3 -left-2 text-xl">🕊️</div>
+      <div className="absolute -bottom-3 -right-2 text-xl">🍃</div>
+
       <div className="mb-3 text-center">
         <div
-          className="text-xl"
-          style={{ fontFamily: "'Brush Script MT', cursive", color: "#3a3a3a" }}
+          className="text-3xl leading-none"
+          style={{
+            fontFamily: "'Brush Script MT','Segoe Script',cursive",
+            color: "#3a2e1f",
+          }}
         >
-          sweet memories
+          Our Memories
+        </div>
+        <div className="mt-1 text-[10px] tracking-[0.35em] text-neutral-500">
+          — A E S T H E T I C · P O L A R O I D —
         </div>
       </div>
-      <div className="flex flex-col gap-3">
+
+      <div className="flex flex-col gap-4">
         {photos.map((p, i) => (
-          <div
-            key={i}
-            className="bg-white p-2 shadow-sm"
-            style={{ borderRadius: "2px" }}
-          >
-            <img src={p} alt="" className="aspect-[4/3] w-full object-cover" />
+          <div key={i} className={`relative ${tilt[i]}`}>
+            <div
+              className="bg-white p-2 pb-8 shadow-md"
+              style={{ borderRadius: "2px" }}
+            >
+              <img
+                src={p}
+                alt=""
+                className="aspect-[4/3] w-full object-cover"
+                style={{ filter: "sepia(.06) saturate(.95)" }}
+              />
+              <div
+                className="mt-1 text-center text-xs"
+                style={{
+                  fontFamily: "'Brush Script MT','Segoe Script',cursive",
+                  color: "#5a4a35",
+                }}
+              >
+                {["morning", "smile", "forever"][i]} · {date}
+              </div>
+            </div>
+            <div className="absolute -left-2 -top-2 text-base">
+              {["🌸", "🌾", "🌻"][i]}
+            </div>
           </div>
         ))}
       </div>
+
       <div className="mt-4 text-center">
         <div
-          className="text-lg"
+          className="text-xl"
           style={{
-            fontFamily: "'Brush Script MT', cursive",
-            color: "#3a3a3a",
+            fontFamily: "'Brush Script MT','Segoe Script',cursive",
+            color: "#3a2e1f",
           }}
         >
-          {date}
+          my beautiful dream
         </div>
-        <div className="text-[10px] uppercase tracking-widest text-neutral-500">
-          polaroid · aesthetic
+        <div className="mt-1 text-[9px] tracking-[0.3em] text-neutral-500">
+          KEEP · THIS · MOMENT
         </div>
       </div>
     </div>
   );
 });
 PhotoStrip.displayName = "PhotoStrip";
+
