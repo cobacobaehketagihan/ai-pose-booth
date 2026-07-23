@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import html2canvas from "html2canvas";
 
-type Template = "strawberry" | "cyberpunk" | "polaroid";
+type Template = "strawberry" | "cyberpunk" | "polaroid" | "y2k" | "botanical";
 
 type Phase = "idle" | "detecting" | "ready" | "session" | "review";
 
