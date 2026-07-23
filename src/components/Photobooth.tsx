@@ -218,7 +218,7 @@ export default function Photobooth() {
             }
             const held = (performance.now() - palmStartRef.current) / 1500;
             setPalmProgress(Math.min(1, held));
-            if (held >= 1 && phaseRef.current !== "ready") {
+            if (held >= 1 && (phaseRef.current as Phase) !== "ready") {
               setPhase("ready");
               beep(1500, 250);
               palmStartRef.current = null;
