@@ -607,6 +607,9 @@ const PhotoStrip = forwardRef<
           <div className="mt-1 text-[10px] font-semibold tracking-wider text-rose-500">
             P2M INFORMATIKA · DESA INDRAGIRI
           </div>
+          <div className="text-[10px] font-bold tracking-[0.2em] text-rose-600">
+            🍓 P2M HMIF ITENAS 2026 🍓
+          </div>
           <div className="text-[9px] italic text-rose-400">{date}</div>
         </div>
       </div>
