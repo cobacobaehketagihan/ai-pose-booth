@@ -1,24 +1,49 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { lazy, Suspense, useEffect, useState } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const Photobooth = lazy(() => import("@/components/Photobooth"));
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "AI Gestured Photobooth ✋📸" },
+      {
+        name: "description",
+        content:
+          "Photobooth interaktif berbasis AI: buka telapak tanganmu ke kamera untuk memicu sesi 3 foto otomatis dengan template estetik.",
+      },
+      { property: "og:title", content: "AI Gestured Photobooth" },
+      {
+        property: "og:description",
+        content:
+          "Sesi 3 foto otomatis dipicu oleh gestur telapak tangan terbuka menggunakan MediaPipe Hands.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-rose-50">
+        <p className="text-sm text-muted-foreground">Loading Photobooth...</p>
+      </div>
+    );
+  }
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-rose-50">
+          <p className="text-sm text-muted-foreground">Loading AI model...</p>
+        </div>
+      }
     >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+      <Photobooth />
+    </Suspense>
   );
 }
