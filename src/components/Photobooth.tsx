@@ -731,6 +731,12 @@ const PhotoStrip = forwardRef<
           >
             [ {date.toUpperCase()} ]
           </div>
+          <div
+            className="mt-1 text-[10px] font-mono font-bold tracking-[0.25em]"
+            style={{ color: "#00e5ff", textShadow: "0 0 6px #00e5ff" }}
+          >
+            &gt;&gt; P2M_HMIF_ITENAS.2026 &lt;&lt;
+          </div>
         </div>
       </div>
     );
