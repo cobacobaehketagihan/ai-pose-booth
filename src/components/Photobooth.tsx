@@ -824,6 +824,199 @@ const PhotoStrip = forwardRef<
         <div className="mt-1 text-[9px] tracking-[0.3em] text-neutral-500">
           KEEP · THIS · MOMENT
         </div>
+        <div className="mt-1 text-[10px] font-bold tracking-[0.25em] text-[#3a2e1f]">
+          ✿ P2M HMIF ITENAS 2026 ✿
+        </div>
+        <div className="text-[9px] italic text-neutral-500">{date}</div>
+      </div>
+    </div>
+  );
+  }
+
+  // ---- Y2K BLING PASTEL: holographic pastel with stars, hearts, sparkles ----
+  if (template === "y2k") {
+    const tilt = ["rotate-1", "-rotate-2", "rotate-2"];
+    return (
+      <div
+        ref={ref}
+        className="relative w-[360px] p-5 shadow-2xl"
+        style={{
+          borderRadius: "18px",
+          background:
+            "radial-gradient(circle at 15% 20%, #e0c3fc 0 40px, transparent 60px)," +
+            "radial-gradient(circle at 85% 80%, #a1c4fd 0 40px, transparent 60px)," +
+            "radial-gradient(circle at 80% 15%, #fbc2eb 0 30px, transparent 50px)," +
+            "linear-gradient(135deg,#fddde6 0%,#c2e9fb 50%,#e0c3fc 100%)",
+          border: "4px solid #ffffff",
+          boxShadow:
+            "0 0 0 3px #ff9ecf inset, 0 0 0 8px #b5e1ff inset, 0 20px 40px -10px rgba(180,120,220,.5)",
+        }}
+      >
+        <div className="absolute -top-3 -left-2 text-2xl rotate-[-15deg]">💿</div>
+        <div className="absolute -top-3 -right-2 text-2xl rotate-[15deg]">⭐</div>
+        <div className="absolute -bottom-3 -left-2 text-2xl">💖</div>
+        <div className="absolute -bottom-3 -right-2 text-2xl">🦋</div>
+
+        <div className="mb-3 text-center">
+          <div
+            className="text-3xl font-black leading-none"
+            style={{
+              background:
+                "linear-gradient(90deg,#ff5ec4,#7d5cff,#5ec8ff)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              fontFamily: "'Brush Script MT','Segoe Script',cursive",
+              textShadow: "0 2px 0 rgba(255,255,255,.6)",
+            }}
+          >
+            Bling Memories ✨
+          </div>
+          <div className="mt-1 text-[10px] font-black tracking-[0.3em] text-[#7d5cff]">
+            ★ Y2K · DREAMCORE · 2026 ★
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          {photos.map((p, i) => (
+            <div key={i} className={`relative ${tilt[i]}`}>
+              <div
+                className="p-[3px]"
+                style={{
+                  borderRadius: "12px",
+                  background:
+                    "linear-gradient(135deg,#ff9ecf 0%,#b5e1ff 50%,#d9a7ff 100%)",
+                }}
+              >
+                <div
+                  className="bg-white p-2"
+                  style={{ borderRadius: "10px" }}
+                >
+                  <img
+                    src={p}
+                    alt=""
+                    className="aspect-[4/3] w-full object-cover"
+                    style={{ borderRadius: "8px", filter: "saturate(1.15)" }}
+                  />
+                </div>
+              </div>
+              <div className="absolute -left-2 -top-2 text-lg">
+                {["💖", "⭐", "🦋"][i]}
+              </div>
+              <div className="absolute -right-2 -bottom-2 text-lg">
+                {["✨", "🌈", "💿"][i]}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 text-center">
+          <div
+            className="text-xl"
+            style={{
+              background: "linear-gradient(90deg,#ff5ec4,#7d5cff)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              fontFamily: "'Brush Script MT','Segoe Script',cursive",
+            }}
+          >
+            so pretty, so shiny 💫
+          </div>
+          <div className="mt-1 text-[10px] font-black tracking-[0.25em] text-[#7d5cff]">
+            ✦ P2M HMIF ITENAS 2026 ✦
+          </div>
+          <div className="text-[9px] italic text-[#a17bd8]">{date}</div>
+        </div>
+      </div>
+    );
+  }
+
+  // ---- BOTANICAL KRAFT: earthy kraft paper with pressed leaves ----
+  const tilt = ["-rotate-1", "rotate-2", "-rotate-2"];
+  return (
+    <div
+      ref={ref}
+      className="relative w-[360px] p-5 shadow-2xl"
+      style={{
+        borderRadius: "10px",
+        background:
+          "radial-gradient(circle at 25% 20%, rgba(90,70,40,.08) 0 2px, transparent 3px)," +
+          "radial-gradient(circle at 75% 70%, rgba(90,70,40,.08) 0 2px, transparent 3px)," +
+          "linear-gradient(180deg,#d9c39a 0%,#c9b184 50%,#b89a6b 100%)",
+        backgroundSize: "28px 28px, 34px 34px, 100% 100%",
+        border: "2px dashed #6b5836",
+        boxShadow:
+          "0 0 0 5px #d9c39a inset, 0 0 0 6px #6b5836 inset, 0 20px 40px -12px rgba(60,45,20,.45)",
+      }}
+    >
+      <div className="absolute -top-3 -left-2 text-2xl rotate-[-20deg]">🌿</div>
+      <div className="absolute -top-3 -right-2 text-2xl rotate-[20deg]">🍂</div>
+      <div className="absolute -bottom-3 -left-2 text-2xl">🌾</div>
+      <div className="absolute -bottom-3 -right-2 text-2xl">🌻</div>
+
+      <div className="mb-3 text-center">
+        <div
+          className="text-3xl leading-none"
+          style={{
+            fontFamily: "'Brush Script MT','Segoe Script',cursive",
+            color: "#3d2f16",
+          }}
+        >
+          Nature Journal
+        </div>
+        <div className="mt-1 text-[10px] font-bold tracking-[0.3em] text-[#5a4520]">
+          — B O T A N I C A L · K R A F T —
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        {photos.map((p, i) => (
+          <div key={i} className={`relative ${tilt[i]}`}>
+            <div
+              className="p-2"
+              style={{
+                background: "#f5ecd7",
+                border: "1px solid #6b5836",
+                borderRadius: "3px",
+                boxShadow: "0 4px 10px rgba(60,45,20,.3)",
+              }}
+            >
+              <img
+                src={p}
+                alt=""
+                className="aspect-[4/3] w-full object-cover"
+                style={{ filter: "sepia(.15) saturate(.9)" }}
+              />
+              <div
+                className="mt-1 text-center text-xs"
+                style={{
+                  fontFamily: "'Brush Script MT','Segoe Script',cursive",
+                  color: "#3d2f16",
+                }}
+              >
+                {["sunrise", "wildflower", "harvest"][i]} · no.{i + 1}
+              </div>
+            </div>
+            <div className="absolute -left-3 -top-3 text-xl rotate-[-15deg]">
+              {["🍃", "🌱", "🌾"][i]}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 text-center">
+        <div
+          className="text-xl"
+          style={{
+            fontFamily: "'Brush Script MT','Segoe Script',cursive",
+            color: "#3d2f16",
+          }}
+        >
+          grown with love 🌱
+        </div>
+        <div className="mt-1 text-[10px] font-bold tracking-[0.25em] text-[#3d2f16]">
+          ❦ P2M HMIF ITENAS 2026 ❦
+        </div>
+        <div className="text-[9px] italic text-[#5a4520]">{date}</div>
       </div>
     </div>
   );
