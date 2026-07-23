@@ -466,6 +466,8 @@ export default function Photobooth() {
                     { id: "strawberry", label: "🍓 Indragiri Strawberry" },
                     { id: "cyberpunk", label: "🌐 Cyberpunk Techy" },
                     { id: "polaroid", label: "📷 Classic Polaroid" },
+                    { id: "y2k", label: "💿 Y2K Bling Pastel" },
+                    { id: "botanical", label: "🌿 Botanical Kraft" },
                   ] as { id: Template; label: string }[]
                 ).map((t) => (
                   <button
