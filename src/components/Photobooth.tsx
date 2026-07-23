@@ -743,8 +743,9 @@ const PhotoStrip = forwardRef<
   }
 
   // ---- CLASSIC POLAROID: vintage cream, pressed flowers, handwriting ----
-  const tilt = ["-rotate-2", "rotate-1", "-rotate-1"];
-  return (
+  if (template === "polaroid") {
+    const tilt = ["-rotate-2", "rotate-1", "-rotate-1"];
+    return (
     <div
       ref={ref}
       className="relative w-[360px] p-5 shadow-2xl"
