@@ -138,28 +138,60 @@ export default function Photobooth() {
     setStatus("Selesai! Pilih template & download 🎉");
   }, [capturePhoto]);
 
-  // MediaPipe setup
+  // MediaPipe setup — load via CDN to avoid ESM bundling issues
   useEffect(() => {
     let cancelled = false;
     let rafActive = true;
 
+    const loadScript = (src: string) =>
+      new Promise<void>((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) return resolve();
+        const s = document.createElement("script");
+        s.src = src;
+        s.crossOrigin = "anonymous";
+        s.onload = () => resolve();
+        s.onerror = () => reject(new Error(`Failed to load ${src}`));
+        document.head.appendChild(s);
+      });
+
     (async () => {
-      const HandsMod = await import("@mediapipe/hands");
-      const CameraMod = await import("@mediapipe/camera_utils");
+      try {
+        await loadScript(
+          "https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.js",
+        );
+        await loadScript(
+          "https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1675466862/camera_utils.js",
+        );
+      } catch (e) {
+        console.error(e);
+        setStatus("Gagal memuat model AI. Cek koneksi internet.");
+        return;
+      }
       if (cancelled) return;
 
-      const HandsCtor = (HandsMod as unknown as { Hands: new (opts: { locateFile: (f: string) => string }) => unknown }).Hands;
-      const CameraCtor = (CameraMod as unknown as { Camera: new (video: HTMLVideoElement, opts: { onFrame: () => Promise<void>; width: number; height: number }) => { start: () => Promise<void>; stop: () => void } }).Camera;
+      const w = window as unknown as {
+        Hands: new (opts: { locateFile: (f: string) => string }) => {
+          setOptions: (o: Record<string, unknown>) => void;
+          onResults: (cb: (r: { multiHandLandmarks?: Landmark[][] }) => void) => void;
+          send: (i: { image: HTMLVideoElement }) => Promise<void>;
+          close?: () => void;
+        };
+        Camera: new (
+          video: HTMLVideoElement,
+          opts: { onFrame: () => Promise<void>; width: number; height: number },
+        ) => { start: () => Promise<void>; stop: () => void };
+      };
 
-      const hands = new HandsCtor({
+      if (!w.Hands || !w.Camera) {
+        setStatus("Model AI gagal diinisialisasi.");
+        return;
+      }
+
+      const hands = new w.Hands({
         locateFile: (file: string) =>
           `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/${file}`,
-      }) as {
-        setOptions: (o: Record<string, unknown>) => void;
-        onResults: (cb: (r: { multiHandLandmarks?: Landmark[][] }) => void) => void;
-        send: (i: { image: HTMLVideoElement }) => Promise<void>;
-        close?: () => void;
-      };
+      });
+
       handsRef.current = hands;
 
       hands.setOptions({
@@ -240,7 +272,7 @@ export default function Photobooth() {
       const video = videoRef.current;
       if (!video) return;
 
-      const camera = new CameraCtor(video, {
+      const camera = new w.Camera(video, {
         onFrame: async () => {
           if (!videoRef.current) return;
           await hands.send({ image: videoRef.current });
