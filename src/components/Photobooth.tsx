@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import html2canvas from "html2canvas";
+import { toPng } from "html-to-image";
 
 type Template = "strawberry" | "cyberpunk" | "polaroid" | "y2k" | "botanical";
 
@@ -308,15 +308,20 @@ export default function Photobooth() {
 
   const download = async () => {
     if (!stripRef.current) return;
-    const canvas = await html2canvas(stripRef.current, {
-      backgroundColor: null,
-      scale: 2,
-      useCORS: true,
-    });
-    const link = document.createElement("a");
-    link.download = `photobooth-${template}-${Date.now()}.png`;
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+    try {
+      const dataUrl = await toPng(stripRef.current, {
+        pixelRatio: 2,
+        cacheBust: true,
+        skipFonts: true,
+      });
+      const link = document.createElement("a");
+      link.download = `photobooth-${template}-${Date.now()}.png`;
+      link.href = dataUrl;
+      link.click();
+    } catch (err) {
+      console.error("Download gagal:", err);
+      setStatus("❌ Download gagal, coba lagi");
+    }
   };
 
   return (
